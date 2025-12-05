@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BAITEN Web Store｜地域のものづくりを応援するオンラインショップ</title>
+  <meta name="description" content="BAITEN Web Store は、福島県浜通りの地域産品や、日本のものづくり企業の技術を活かしたインテリア雑貨をお届けするストアです。" />
+  <link rel="stylesheet" href="baiten.css" />
+</head>
+<body>
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="nav">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-text">BAITEN Web Store</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#top">Top</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <p class="hero-label">Hamadori Local Craft</p>
+      <h1 class="hero-title">
+        地域から生まれる、<br class="sp-only" />小さなものづくりの光
+      </h1>
+      <p class="hero-text">
+        BAITEN Web Store は、<br class="sp-only" />
+        福島県浜通り発の無人販売システム「BAITEN STAND」から生まれた<br />
+        地域の“いいもの”を届けるオンラインストアです。
+      </p>
+      <div class="hero-cta">
+        <a href="#products" class="btn primary">商品を見る</a>
+        <a href="#about" class="btn ghost">ストアについて</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      地域の技術 × インテリア雑貨
+    </div>
+  </section>
+
+  <main>
+
+    <!-- About セクション -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <h2 class="section-title">About BAITEN Web Store</h2>
+      </div>
+
+      <div class="about-text" style="font-size:0.95rem; color:#6b7280; line-height:1.8;">
+        <p>
+          「BAITENウェブストア」は、福島の浜通り発の無人販売システム
+          <strong>「BAITEN STAND」</strong>のオンラインストアです。
+        </p>
+
+        <p>
+          「BAITEN STAND」は、東日本大震災からの復興の地で草の根レベルからの小売インフラ構築を目指して生まれました。
+          現在は、<strong>大熊、富岡、楢葉、南相馬などの8箇所の施設・工場・ホテル</strong>で稼働しています。
+        </p>
+
+        <p>
+          浜通りは、良い意味で「過疎地域の課題の先進モデル」であり、地域が持つポテンシャルに注目が集まっています。
+          過疎地域にとって大きな挑戦のひとつは<strong>産業創出</strong>です。その小さな一歩となるのが、
+          地元企業や地域の技術が生み出す魅力的なプロダクトです。
+        </p>
+
+        <p>
+          「BAITENウェブストア」は、伝統工芸品はもちろん、
+          新たな価値を生み出す企業、技術力のある企業が生み出す“光る商品”を厳選して、
+          <strong>インテリア雑貨を中心にお届けします。</strong>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- 商品一覧（回転タイル） -->
+    <section class="section" id="products">
+      <div class="section-header">
+        <h2 class="section-title">Products</h2>
+        <p class="section-sub">
+          地域企業の技術が光る、特別なアイテムをお届けします。
+        </p>
+      </div>
+
+      <div class="tiles" id="product-grid">
+      </div>
+    </section>
+
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-sub">
+          BAITEN Web Store に関するお問い合わせ、<br />
+          BAITEN STAND 導入のご相談はこちらから。
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-main">
+          <h3>お問い合わせ方法</h3>
+          <ul>
+            <li>・商品に関するご質問</li>
+            <li>・地域企業とのコラボやOEMの相談</li>
+            <li>・BAITEN STAND の導入・連携について</li>
+          </ul>
+          <p class="contact-note">
+            「この商品をもっと詳しく知りたい」「別のバリエーションはできる？」など、<br>
+            どんな小さなことでもお気軽にご相談ください。
+          </p>
+          <div class="contact-actions">
+            <a href="https://example.com/contact" class="btn primary">フォームで問い合わせ</a>
+            <a href="#line" class="btn ghost">LINEで相談</a>
+          </div>
+        </div>
+
+        <div class="contact-side" id="line">
+          <p class="contact-side-label">公式LINE</p>
+          <div class="contact-line-qr">
+            <img src="img/line-qr.png" alt="LINE QRコード" />
+          </div>
+          <p class="contact-side-text">
+            QRコードを読み取り「BAITEN Web Store」とメッセージを送ってください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <small>© AIBOD Inc. / BAITEN STAND</small>
+  </footer>
+
+  <!-- ★ タイルをクリックで回転させるスクリプト -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tiles = document.querySelectorAll('.tile');
+      tiles.forEach(function (tile) {
+        tile.addEventListener('click', function (e) {
+          // ボタンやリンクをクリックしたときは回転させない
+          if (e.target.closest('a')) return;
+          tile.classList.toggle('flipped');
+        });
+      });
+    });
+  </script>
+  <script src="products.js"></script>
+  <script src="store.js"></script>
+</body>
+</html>
+
