@@ -94,7 +94,7 @@
     </section>
 
     <section id="test">
-      <div id='product-component-1765172474932'></div>
+      <div id='collection-component-1765259344282'></div>
       <script type="text/javascript">
       /*<![CDATA[*/
       (function () {
@@ -121,9 +121,9 @@
             storefrontAccessToken: 'dc019dab51b9551c8845418e4298c540',
           });
           ShopifyBuy.UI.onReady(client).then(function (ui) {
-            ui.createComponent('product', {
-              id: '10177648525634',
-              node: document.getElementById('product-component-1765172474932'),
+            ui.createComponent('collection', {
+              id: '507848032578',
+              node: document.getElementById('collection-component-1765259344282'),
               moneyFormat: '%C2%A5%7B%7Bamount_no_decimals%7D%7D',
               options: {
         "product": {
@@ -132,12 +132,57 @@
               "@media (min-width: 601px)": {
                 "max-width": "calc(25% - 20px)",
                 "margin-left": "20px",
-                "margin-bottom": "50px"
+                "margin-bottom": "50px",
+                "width": "calc(25% - 20px)"
+              },
+              "img": {
+                "height": "calc(100% - 15px)",
+                "position": "absolute",
+                "left": "0",
+                "right": "0",
+                "top": "0"
+              },
+              "imgWrapper": {
+                "padding-top": "calc(75% + 15px)",
+                "position": "relative",
+                "height": "0"
               }
+            },
+            "title": {
+              "font-family": "Arial, sans-serif",
+              "font-weight": "normal",
+              "color": "#7d28ec"
+            },
+            "button": {
+              "font-family": "Arial, sans-serif",
+              "color": "#fcf9f9",
+              ":hover": {
+                "color": "#fcf9f9",
+                "background-color": "#d59bdd"
+              },
+              "background-color": "#edacf5",
+              ":focus": {
+                "background-color": "#d59bdd"
+              },
+              "border-radius": "29px",
+              "padding-left": "29px",
+              "padding-right": "29px"
+            },
+            "price": {
+              "font-family": "Arial, sans-serif",
+              "color": "#0a0a0a"
+            },
+            "compareAt": {
+              "font-family": "Arial, sans-serif",
+              "color": "#0a0a0a"
+            },
+            "unitPrice": {
+              "font-family": "Arial, sans-serif",
+              "color": "#0a0a0a"
             }
           },
           "text": {
-            "button": "Add to cart"
+            "button": "購入はこちら"
           }
         },
         "productSet": {
@@ -163,6 +208,45 @@
                 "margin-left": "0px",
                 "margin-bottom": "0px"
               }
+            },
+            "button": {
+              "font-family": "Arial, sans-serif",
+              "color": "#fcf9f9",
+              ":hover": {
+                "color": "#fcf9f9",
+                "background-color": "#d59bdd"
+              },
+              "background-color": "#edacf5",
+              ":focus": {
+                "background-color": "#d59bdd"
+              },
+              "border-radius": "29px",
+              "padding-left": "29px",
+              "padding-right": "29px"
+            },
+            "title": {
+              "font-family": "Helvetica Neue, sans-serif",
+              "font-weight": "bold",
+              "font-size": "26px",
+              "color": "#4c4c4c"
+            },
+            "price": {
+              "font-family": "Helvetica Neue, sans-serif",
+              "font-weight": "normal",
+              "font-size": "18px",
+              "color": "#4c4c4c"
+            },
+            "compareAt": {
+              "font-family": "Helvetica Neue, sans-serif",
+              "font-weight": "normal",
+              "font-size": "15.299999999999999px",
+              "color": "#4c4c4c"
+            },
+            "unitPrice": {
+              "font-family": "Helvetica Neue, sans-serif",
+              "font-weight": "normal",
+              "font-size": "15.299999999999999px",
+              "color": "#4c4c4c"
             }
           },
           "text": {
@@ -171,12 +255,49 @@
         },
         "option": {},
         "cart": {
+          "styles": {
+            "button": {
+              "font-family": "Arial, sans-serif",
+              "color": "#fcf9f9",
+              ":hover": {
+                "color": "#fcf9f9",
+                "background-color": "#d59bdd"
+              },
+              "background-color": "#edacf5",
+              ":focus": {
+                "background-color": "#d59bdd"
+              },
+              "border-radius": "29px"
+            }
+          },
           "text": {
             "total": "Subtotal",
             "button": "Checkout"
           }
         },
-        "toggle": {}
+        "toggle": {
+          "styles": {
+            "toggle": {
+              "font-family": "Arial, sans-serif",
+              "background-color": "#edacf5",
+              ":hover": {
+                "background-color": "#d59bdd"
+              },
+              ":focus": {
+                "background-color": "#d59bdd"
+              }
+            },
+            "count": {
+              "color": "#fcf9f9",
+              ":hover": {
+                "color": "#fcf9f9"
+              }
+            },
+            "iconPath": {
+              "fill": "#fcf9f9"
+            }
+          }
+        }
       },
             });
           });
