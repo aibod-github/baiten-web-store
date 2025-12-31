@@ -6,7 +6,7 @@ const PRODUCTS = [
   {
     id: "emboss_coaster_sakura",
     lineId: "emboss_coaster_sakura",  // LINE相談時に送信される商品識別子
-    shopifyProductId: null,  // Shopifyの商品ID（数字部分のみ）。設定するとShopifyから価格を取得
+    shopifyProductId: "10177648525634",  // Shopifyの商品ID（数字部分のみ）。設定するとShopifyから価格を取得
     name: "エンボスコースター（桜）",
     code: "ITEM-001",
     price: 1200,  // shopifyProductIdが設定されている場合はShopifyの価格で上書きされる
