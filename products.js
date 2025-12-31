@@ -5,16 +5,18 @@
 const PRODUCTS = [
   {
     id: "emboss_coaster_sakura",
+    lineId: "emboss_coaster_sakura",  // LINE相談時に送信される商品識別子
+    shopifyProductId: null,  // Shopifyの商品ID（数字部分のみ）。設定するとShopifyから価格を取得
     name: "エンボスコースター（桜）",
     code: "ITEM-001",
-    price: 1200,
+    price: 1200,  // shopifyProductIdが設定されている場合はShopifyの価格で上書きされる
     category: "interior", // 例: "interior", "craft", "food" など
     tags: ["インテリア雑貨", "地域産品", "南相馬"],
-    image: "https://drive.google.com/uc?id=1HmkrDLDenbeLOizF0EIRpNliy9IdSEGq",
+    image: "img/embosscoaster-kirinuki.jpg",
 
     // 表面の説明（短め）
     description:
-      "日本ならではの「桜」をあしらった、精密板金加工の技術を応用したコースター。エンボス加工により、グラスが少し浮き上がることで、持ち上げたときにコースターがくっつきにくい、さりげない使いやすさが特徴です。普段使いはもちろん、天井から吊り下げてアクセサリーとしても楽しめます。",
+      "桜をモチーフにした精密板金加工のコースター。エンボス加工でグラスがくっつきにくく、吊り下げアクセサリーとしても楽しめます。",
 
     maker: "福島県南相馬市 昭陽製作所",
     availability: "在庫あり",        // 表示用のテキスト
@@ -25,8 +27,8 @@ const PRODUCTS = [
     backTitleLine: "STAFF VOICE",
     backTitle: "この一枚に込めたもの",
     backParagraphs: [
-      "普段は工場や装置向けの精密板金加工を行っている昭陽製作所さん。「せっかくの技術を、暮らしのそばに置ける形にしたい」という想いから生まれたのが、このエンボスコースターです。",
-      "桜のモチーフには、「震災後の浜通りの春を、毎年きちんと迎えたい」という静かな願いが込められています。手に取るたびに、ものづくりの背景にあるストーリーを少しだけ感じていただけたらうれしいです。"
+      "精密板金加工の技術を暮らしのそばに届けたい——そんな想いから生まれた一品です。",
+      "桜には、浜通りの春を毎年迎えたいという願いが込められています。"
     ],
     backMeta: "BAITEN Web Store スタッフより",
 

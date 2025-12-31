@@ -55,8 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // 価格バッジ
     const priceBadge = document.createElement("span");
     priceBadge.className = "tile-badge";
-    const price = typeof product.price === "number" ? product.price.toLocaleString("ja-JP") : product.price;
-    priceBadge.textContent = `${price}${product.priceLabel || "円"}`;
+    if (product.shopifyProductId) {
+      priceBadge.dataset.shopifyProductId = product.shopifyProductId;
+      priceBadge.textContent = "読込中...";  // Shopifyから取得するまでの仮表示
+    } else {
+      const price = typeof product.price === "number" ? product.price.toLocaleString("ja-JP") : product.price;
+      priceBadge.textContent = `${price}${product.priceLabel || "円"}`;
+    }
 
     title.appendChild(img);
     title.appendChild(titleTextWrap);
@@ -148,6 +153,10 @@ document.addEventListener("DOMContentLoaded", () => {
     primaryBtn.className = "btn primary";
     primaryBtn.href = product.primaryActionLink || "#contact";
     primaryBtn.textContent = product.primaryActionLabel || "購入を相談する";
+    if (product.lineId) {
+      primaryBtn.dataset.lineId = product.lineId;
+      primaryBtn.dataset.productName = product.name || "";
+    }
 
     const secondaryBtn = document.createElement("a");
     secondaryBtn.className = "btn ghost";
@@ -197,5 +206,109 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // ===== LINE相談ボタンの処理 =====
+  (function() {
+    const LINE_BASIC_ID = '@367bvydv';
+    const encodedLineId = encodeURIComponent(LINE_BASIC_ID);
+    const baseUrl = 'https://line.me/R/oaMessage/' + encodedLineId + '/?';
+
+    document.querySelectorAll('.btn[data-line-id]').forEach(function(btn) {
+      const lineId = btn.dataset.lineId;
+      const productName = btn.dataset.productName || lineId;
+      if (!lineId) return;
+
+      // ボタンごとのメッセージ文面
+      const message = `【BAITEN Web Store】「${productName}」について相談したいです。`;
+
+      // URL エンコードして href にセット
+      const url = baseUrl + encodeURIComponent(message);
+      btn.href = url;
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+    });
+  })();
+
+  // ===== Shopifyから価格を取得 =====
+  (function() {
+    const SHOPIFY_DOMAIN = 'mre91v-dx.myshopify.com';
+    const STOREFRONT_ACCESS_TOKEN = 'dc019dab51b9551c8845418e4298c540';
+
+    // Shopify商品IDが設定されている価格バッジを取得
+    const priceBadges = document.querySelectorAll('.tile-badge[data-shopify-product-id]');
+    if (priceBadges.length === 0) return;
+
+    // 各商品の価格を取得
+    priceBadges.forEach(async function(badge) {
+      const productId = badge.dataset.shopifyProductId;
+      if (!productId) return;
+
+      const gid = `gid://shopify/Product/${productId}`;
+
+      const query = `
+        query getProduct($id: ID!) {
+          product(id: $id) {
+            title
+            variants(first: 1) {
+              edges {
+                node {
+                  price {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      try {
+        const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN
+          },
+          body: JSON.stringify({
+            query: query,
+            variables: { id: gid }
+          })
+        });
+
+        const data = await response.json();
+        const product = data?.data?.product;
+        const priceData = product?.variants?.edges?.[0]?.node?.price;
+
+        if (priceData) {
+          const amount = Math.floor(parseFloat(priceData.amount));
+          badge.textContent = `${amount.toLocaleString('ja-JP')}円`;
+        } else {
+          // 商品が見つからない場合はフォールバック
+          const fallbackProduct = PRODUCTS.find(p => p.shopifyProductId === productId);
+          if (fallbackProduct && fallbackProduct.price) {
+            const price = typeof fallbackProduct.price === "number"
+              ? fallbackProduct.price.toLocaleString("ja-JP")
+              : fallbackProduct.price;
+            badge.textContent = `${price}${fallbackProduct.priceLabel || "円"}`;
+          } else {
+            badge.textContent = "価格未設定";
+          }
+        }
+      } catch (error) {
+        console.error('Shopify価格取得エラー:', error);
+        // エラー時はフォールバック
+        const fallbackProduct = PRODUCTS.find(p => p.shopifyProductId === productId);
+        if (fallbackProduct && fallbackProduct.price) {
+          const price = typeof fallbackProduct.price === "number"
+            ? fallbackProduct.price.toLocaleString("ja-JP")
+            : fallbackProduct.price;
+          badge.textContent = `${price}${fallbackProduct.priceLabel || "円"}`;
+        } else {
+          badge.textContent = "価格取得失敗";
+        }
+      }
+    });
+  })();
 });
 
